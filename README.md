@@ -1,3 +1,3 @@
-# VSCode上のPlatformIO環境でMyCobotの開発をするための雛形
+# VSCode上のPlatformIO環境でmyPalletizerの開発をするための雛形
 
-MyCobotのプログラムをVSCode上のPlatformIO環境で書くための雛形です。
+myPalletizerのプログラムをVSCode上のPlatformIO環境で書くための雛形です。

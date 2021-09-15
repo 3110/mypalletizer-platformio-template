@@ -1,15 +1,15 @@
 #ifndef PARAMETERLIST_H
 #define PARAMETERLIST_H
 
-#include <Arduino.h>
-
 #include <array>
+#include <map>
 
 namespace myCobotDefine {
 
 #define SYSTEM_VERSION 0x01
 
 #define MYCOBOT_500_VERSION 1
+// #define PI						3.14159265
 #define COEFFICIENT (180.0 / PI)
 
 // DH parameters
@@ -38,7 +38,7 @@ const float cvt_encoder_to_rad = 2048 / PI;
 
 // robotic data struct
 enum Axis : int { X = 0, Y, Z, RX, RY, RZ };
-enum Joint : int { J1 = 1, J2, J3, J4, J5, J6 };
+enum Joint : int { J1 = 0, J2, J3, J4, J5, J6 };
 constexpr const int Axes = 6;
 constexpr const int Joints = 6;
 using Coords = std::array<float, Axes>;
@@ -46,19 +46,33 @@ using Angles = std::array<float, Joints>;
 
 using Encoders = std::array<float, Joints>;
 
+// MyPalletizer data struct
+enum MyPalletizerAxis : int { P_X = 0, P_Y, P_Z, P_THETA };
+enum MyPalletizerJoint : int { P_J1 = 0, P_J2, P_J3, P_J4 };
+constexpr const int MyPalletizerAxesNum = 4;
+constexpr const int MyPalletizerJointsNum = 4;
+using MyPalletizerCoords = std::array<float, MyPalletizerAxesNum>;
+using MyPalletizerAngles = std::array<float, MyPalletizerJointsNum>;
+
+using MyPalletizerEncoders = std::array<float, MyPalletizerJointsNum>;
+
 // servo speed
-const float maximumLargeServoSpeed = 1000;  // 2000?
-const float maximumSmallServoSpeed = 1000;  // 3000?
+const float maximum_large_servo_speed = 1000;  // 2000?
+const float maximum_small_servo_speed = 1400;  // 3000?
 
 // isInPosition offset
-const float isInPositionOffset = 5;
-const float isInPosetureOffset = 0.3;
+const float is_in_position_offset = 5;
+const float is_in_poseture_offset = 0.3;
+const float is_in_angles_offset = 0.1;
 
 // reference frame type
-enum RFType : int { BASE = 0, WORLD };
+enum RFType : int { ERROR_RF = -1, BASE = 0, WORLD };
 
 // compute flange pose or tool pose
-enum EndType : int { FLANGE = 0, TOOL };
+enum EndType : int { ERROR_END = -1, FLANGE = 0, TOOL };
+
+// movement type
+enum MovementType : int { ERROR_MOVEMENT = -1, MOVEJ = 0, MOVEL };
 
 struct RobotPose {
     RobotPose() {
@@ -101,4 +115,16 @@ struct JointRanges {
 };
 
 }  // namespace myCobotDefine
+
+namespace roboticMessages {
+
+#define IK_NO_SOLUTION 0x20
+#define ITS_POWER_OFF 0x21
+
+const std::pair<int, std::string> printList[] = {
+    {IK_NO_SOLUTION, "inverse kinematics no solution"},
+    {ITS_POWER_OFF, "robotic is power off"}};
+
+}  // namespace roboticMessages
+
 #endif  // !PARAMETERLIST_H
