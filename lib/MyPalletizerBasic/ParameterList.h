@@ -1,5 +1,5 @@
-#ifndef PARAMETERLIST_H
-#define PARAMETERLIST_H
+#ifndef PARAMETERLIST_H_
+#define PARAMETERLIST_H_
 
 #include <array>
 #include <map>
@@ -127,4 +127,4 @@ const std::pair<int, std::string> printList[] = {
 
 }  // namespace roboticMessages
 
-#endif  // !PARAMETERLIST_H
+#endif  // !PARAMETERLIST_H_

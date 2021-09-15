@@ -1,5 +1,5 @@
-#ifndef _MyPalletizerBASIC_H_
-#define _MyPalletizerBASIC_H_
+#ifndef MY_PALLETIZER_BASIC_H_
+#define MY_PALLETIZER_BASIC_H_
 
 #include <Arduino.h>
 #include <M5Stack.h>
@@ -148,4 +148,4 @@ private:
     std::map<int, std::string> messages_map;
 };
 
-#endif
+#endif  // !MY_PALLETIZER_BASIC_H_
